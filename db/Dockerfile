@@ -7,7 +7,6 @@ ADD ./jwt.sql /docker-entrypoint-initdb.d/init-scripts/99-jwt.sql
 ADD ./_supabase.sql /docker-entrypoint-initdb.d/migrations/97-_supabase.sql
 ADD ./logs.sql /docker-entrypoint-initdb.d/migrations/99-logs.sql
 ADD ./pooler.sql /docker-entrypoint-initdb.d/migrations/99-pooler.sql
+ADD --chmod=755 ./entrypoint.sh /entrypoint.sh
 
-USER postgres
-
-CMD ["postgres", "-c", "config_file=/etc/postgresql/postgresql.conf", "-c", "log_min_messages=fatal"]
+CMD ["/bin/sh", "-c", "/entrypoint.sh"]
