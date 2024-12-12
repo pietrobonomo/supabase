@@ -1,5 +1,10 @@
 FROM supabase/postgres:15.6.1.146
 
+RUN apt-get update && apt-get install -y openssl sudo
+
+# Allow the postgres user to execute certain commands as root without a password
+RUN echo "postgres ALL=(root) NOPASSWD: /bin/chown" > /etc/sudoers.d/postgres
+
 ADD ./realtime.sql /docker-entrypoint-initdb.d/migrations/99-realtime.sql
 ADD ./webhooks.sql /docker-entrypoint-initdb.d/init-scripts/98-webhooks.sql
 ADD ./roles.sql /docker-entrypoint-initdb.d/init-scripts/99-roles.sql
@@ -8,5 +13,7 @@ ADD ./_supabase.sql /docker-entrypoint-initdb.d/migrations/97-_supabase.sql
 ADD ./logs.sql /docker-entrypoint-initdb.d/migrations/99-logs.sql
 ADD ./pooler.sql /docker-entrypoint-initdb.d/migrations/99-pooler.sql
 ADD --chmod=755 ./entrypoint.sh /entrypoint.sh
+
+USER postgres
 
 CMD ["/bin/sh", "-c", "/entrypoint.sh"]
