@@ -19,6 +19,7 @@ jobs:
         include:
           - image: "ghcr.io/6ixfalls/supabase-postgres"
             context: "{{defaultContext}}:postgres"
+            tagFrom: "./postgres/Dockerfile"
     runs-on: ubuntu-latest
     permissions:
       contents: read
