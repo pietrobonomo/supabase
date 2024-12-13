@@ -11,4 +11,4 @@ ADD ./pooler.sql /docker-entrypoint-initdb.d/migrations/99-pooler.sql
 COPY --chmod=755 wrapper.sh /usr/local/bin/wrapper.sh
 
 ENTRYPOINT ["wrapper.sh"]
-CMD ["postgres", "-D", "/etc/postgresql", "--port=5432", "-c", "log_min_messages=fatal"]
+CMD ["postgres", "-c", "config_file=/etc/postgresql/postgresql.conf", "--port=5432", "-c", "log_min_messages=fatal"]
