@@ -18,4 +18,4 @@ RUN echo "postgres ALL=(root) NOPASSWD: /usr/bin/mkdir, /bin/chown, /usr/bin/ope
 COPY --chmod=755 wrapper.sh /usr/local/bin/wrapper.sh
 
 ENTRYPOINT ["wrapper.sh"]
-CMD ["postgres", "--port=5432", "-c", "log_min_messages=fatal"]
+CMD ["postgres", "-c", "config_file=/etc/postgresql/postgresql.conf", "--port=5432", "-c", "log_min_messages=fatal"]
