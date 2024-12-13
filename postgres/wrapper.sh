@@ -29,7 +29,7 @@ if [[ ! -e "/var/lib/postgresql/data/custom" ]]; then
   chown postgres:postgres /var/lib/postgresql/data/custom
 fi
 # If custom directory isnt "mounted", copy any changed configs and "mount" it
-if ! [[ -L "/var/lib/postgresql/data/custom" && -d "/etc/postgresql-custom" ]]; then
+if ! [[ -L "/etc/postgresql-custom" && -d "/var/lib/postgresql/data/custom" ]]; then
   yes | cp -arf /etc/postgresql-custom/* /var/lib/postgresql/data/custom
   rm -rf /etc/postgresql-custom
   ln -s /var/lib/postgresql/data/custom /etc/postgresql-custom
