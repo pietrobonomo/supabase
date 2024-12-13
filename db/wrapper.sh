@@ -20,7 +20,7 @@ unset PGHOST
 ## it ends up being empty
 unset PGPORT
 
-sed -i -e 's/data_directory = \\'\/var\/lib\/postgresql\/data\\'/data_directory = \\'\/var\/lib\/postgresql\/data\/pgdata\\'/g' /etc/postgresql/postgresql.conf
+sed -i -e 's/data_directory = '\''\/var\/lib\/postgresql\/data'\''/data_directory = '\''\/var\/lib\/postgresql\/data\/pgdata'\''/g' /etc/postgresql/postgresql.conf
 
 # Call the entrypoint script with the
 # appropriate PGHOST & PGPORT and redirect
