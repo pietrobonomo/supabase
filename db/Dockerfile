@@ -8,7 +8,4 @@ ADD ./_supabase.sql /docker-entrypoint-initdb.d/migrations/97-_supabase.sql
 ADD ./logs.sql /docker-entrypoint-initdb.d/migrations/99-logs.sql
 ADD ./pooler.sql /docker-entrypoint-initdb.d/migrations/99-pooler.sql
 
-COPY --chmod=755 wrapper.sh /usr/local/bin/wrapper.sh
-
-ENTRYPOINT ["wrapper.sh"]
 CMD ["postgres", "-c", "config_file=/etc/postgresql/postgresql.conf", "--port=5432", "-c", "log_min_messages=fatal"]
