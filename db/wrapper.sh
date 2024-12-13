@@ -20,8 +20,7 @@ unset PGHOST
 ## it ends up being empty
 unset PGPORT
 
-chown -Rf postgres:postgres /var/lib/postgresql/data
-chmod -R 700 /var/lib/postgresql/data
+sed -i -e 's/\/var\/lib\/postgresql\/data/\/var\/lib\/postgresql\/data\/pgdata/g' /etc/postgresql/postgresql.conf
 
 # Call the entrypoint script with the
 # appropriate PGHOST & PGPORT and redirect
