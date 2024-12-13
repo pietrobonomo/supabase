@@ -20,6 +20,8 @@ unset PGHOST
 ## it ends up being empty
 unset PGPORT
 
+sed -i -e 's/\/var\/lib\/postgresql\/data/\/var\/lib\/postgresql\/data\/pgdata/g' /etc/postgresql/postgresql.conf
+
 # Call the entrypoint script with the
 # appropriate PGHOST & PGPORT and redirect
 # the output to stdout if LOG_TO_STDOUT is true
