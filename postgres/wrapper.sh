@@ -22,6 +22,10 @@ unset PGPORT
 
 sed -i -e 's/data_directory = '\''\/var\/lib\/postgresql\/data'\''/data_directory = '\''\/var\/lib\/postgresql\/data\/pgdata'\''/g' /etc/postgresql/postgresql.conf
 
+mkdir -p /var/lib/postgresql/data/custom
+rm -rf /etc/postgresql-custom
+ln -s /var/lib/postgresql/data/custom /etc/postgresql-custom
+
 # Call the entrypoint script with the
 # appropriate PGHOST & PGPORT and redirect
 # the output to stdout if LOG_TO_STDOUT is true
