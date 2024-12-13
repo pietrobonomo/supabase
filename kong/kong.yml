@@ -86,8 +86,8 @@ services:
 
   ## Secure REST routes
   - name: rest-v1
-    _comment: 'PostgREST: /rest/v1/* -> http://rest:3000/*'
-    url: http://rest:3000/
+    _comment: 'PostgREST: /rest/v1/* -> http://$REST_HOST:3000/*'
+    url: http://$REST_HOST:3000/
     routes:
       - name: rest-v1-all
         strip_path: true
@@ -208,8 +208,8 @@ services:
 
   ## Secure Database routes
   - name: meta
-    _comment: 'pg-meta: /pg/* -> http://pg-meta:8080/*'
-    url: http://meta:8080/
+    _comment: 'pg-meta: /pg/* -> http://$META_HOST:8080/*'
+    url: http://$META_HOST:8080/
     routes:
       - name: meta-all
         strip_path: true
@@ -227,8 +227,8 @@ services:
 
   ## Protected Dashboard - catch all remaining routes
   - name: dashboard
-    _comment: 'Studio: /* -> http://studio:3000/*'
-    url: http://studio:3000/
+    _comment: 'Studio: /* -> http://$STUDIO_HOST:3000/*'
+    url: http://$STUDIO_HOST:3000/
     routes:
       - name: dashboard-all
         strip_path: true
