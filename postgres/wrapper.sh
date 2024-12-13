@@ -20,15 +20,19 @@ unset PGHOST
 ## it ends up being empty
 unset PGPORT
 
+# For some reason postgres doesn't want to respect our DBDATA variable. So we need to replace it
 sed -i -e 's/data_directory = '\''\/var\/lib\/postgresql\/data'\''/data_directory = '\''\/var\/lib\/postgresql\/data\/pgdata'\''/g' /etc/postgresql/postgresql.conf
 
 # https://github.com/supabase/postgres/blob/c45336c611971037c2cc9fa21045870d225f80d5/Dockerfile-16
-if [[ ! -e /var/lib/postgresql/data/custom ]]; then
+if [[ ! -e "/var/lib/postgresql/data/custom" ]]; then
   mkdir -p /var/lib/postgresql/data/custom
 fi
-yes | cp -rf /etc/postgresql-custom/* /var/lib/postgresql/data/custom
-rm -rf /etc/postgresql-custom
-ln -s /var/lib/postgresql/data/custom /etc/postgresql-custom
+# If custom directory isnt "mounted", copy any changed configs and "mount" it
+if ! [[ -L "/var/lib/postgresql/data/custom" && -d "/etc/postgresql-custom" ]]; then
+  yes | cp -arf /etc/postgresql-custom/* /var/lib/postgresql/data/custom
+  rm -rf /etc/postgresql-custom
+  ln -s /var/lib/postgresql/data/custom /etc/postgresql-custom
+fi
 
 # Call the entrypoint script with the
 # appropriate PGHOST & PGPORT and redirect
