@@ -26,6 +26,7 @@ sed -i -e 's/data_directory = '\''\/var\/lib\/postgresql\/data'\''/data_director
 # https://github.com/supabase/postgres/blob/c45336c611971037c2cc9fa21045870d225f80d5/Dockerfile-16
 if [[ ! -e "/var/lib/postgresql/data/custom" ]]; then
   mkdir -p /var/lib/postgresql/data/custom
+  chown postgres:postgres /var/lib/postgresql/data/custom
 fi
 # If custom directory isnt "mounted", copy any changed configs and "mount" it
 if ! [[ -L "/var/lib/postgresql/data/custom" && -d "/etc/postgresql-custom" ]]; then
