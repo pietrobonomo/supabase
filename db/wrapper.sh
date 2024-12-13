@@ -20,6 +20,8 @@ unset PGHOST
 ## it ends up being empty
 unset PGPORT
 
+echo "$@"
+
 # Call the entrypoint script with the
 # appropriate PGHOST & PGPORT and redirect
 # the output to stdout if LOG_TO_STDOUT is true
