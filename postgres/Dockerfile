@@ -1,4 +1,4 @@
-FROM supabase/postgres:15.8.1.060
+FROM supabase/postgres:15.8.1.085
 
 ADD ./realtime.sql /docker-entrypoint-initdb.d/migrations/99-realtime.sql
 ADD ./webhooks.sql /docker-entrypoint-initdb.d/init-scripts/98-webhooks.sql
@@ -11,4 +11,5 @@ ADD ./pooler.sql /docker-entrypoint-initdb.d/migrations/99-pooler.sql
 COPY --chmod=755 wrapper.sh /usr/local/bin/wrapper.sh
 
 ENTRYPOINT ["wrapper.sh"]
+
 CMD ["postgres", "-c", "config_file=/etc/postgresql/postgresql.conf", "--port=5432"]
