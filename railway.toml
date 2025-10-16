@@ -1,6 +1,7 @@
 [build]
 builder = "DOCKERFILE"
-dockerfilePath = "kong/Dockerfile"
+dockerfilePath = "/kong/Dockerfile"
+watchPatterns = ["/kong/**"]
 
 [deploy]
 startCommand = ""
